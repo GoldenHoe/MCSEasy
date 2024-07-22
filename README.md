@@ -1,0 +1,2 @@
+# MCSAuto
+用于帮助有需要创建Minecraft服务器的用户开启他们的MC服务器
