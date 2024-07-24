@@ -1,8 +1,6 @@
 # MCSAuto
 用于帮助有需要创建Minecraft服务器的用户开启他们的MC服务器
 
-=====MCSEasy Alpha v1.0.0=====
-
 Minecraft简易开服程序(MCSEasy) README.md
 
 -----概述-----
@@ -35,7 +33,7 @@ CPU推荐2核心及以上，8核心以上最佳。
 
 +++启动+++
 
-解压后打开位于MCSEasy文件夹目录下的main.exe
+解压后找到位于./dist文件夹的MCSEasy.exe，v1.0.0-r2可将程序单独复制出文件夹，不影响使用
 
 +++注意事项+++
 
