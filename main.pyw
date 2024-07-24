@@ -8,8 +8,9 @@ import wget
 import urllib.request
 import sys
 #让用户自定义启动方式
+easygui.msgbox("使用注意事项：建议不要将MCSEasy放置于C盘；\n如果直接启动报错，请检查是否正确选择了启动脚本所在路径；\n在启动服务器时，可能需要关闭第一个命令窗口才能正常启动；\n某些情况下使用虚拟机将无法下载版本","提示",'我已知晓')
 msg = '选择启动方式'
-choices = ['直接启动','启动（同时启动内网穿透工具）','下载内网穿透软件(Cpolar)','下载Minecraft服务端','我没有服务器启动脚本']
+choices = ['直接启动','启动（同时启动内网穿透工具）','下载内网穿透软件(Cpolar)','下载Minecraft服务端','我没有服务器启动脚本或需要修改内存']
 title = '选择启动方式'
 cho = easygui.choicebox(msg,title,choices)
 #判断用户选项，做出相应反应
@@ -22,16 +23,14 @@ if cho == choices[0]:
         root = tk.Tk()
         root.withdraw()
         Folderpath = filedialog.askdirectory(title='选择文件夹（路径不要带空格）')
-        #Filepath = filedialog.askopenfilename(title='选择文件（路径不要带空格）')
         #保存路径
         with open('fdp_save.txt', 'w') as f:
             f.write(Folderpath)
         #显示提示
-        os.system(
-            'mshta vbscript:msgbox("启动路径已保存，下次启动可直接选择“我已配置过”，再次选择路径会覆盖原来的路径",64,"提示")(window.close)'
-        )
+        easygui.msgbox("启动路径已保存，下次启动可直接选择“我已配置过”，再次选择路径会覆盖原来的路径","提示")
         os.chdir(Folderpath)
         os.system('start StartServer.bat')
+
     if c == c1[1]:
         #读取保存的路径文件
         with open('fdp_save.txt', 'r') as file:
@@ -39,12 +38,8 @@ if cho == choices[0]:
         os.chdir(content)
         os.system('start StartServer.bat')
 if cho == choices[1]:
-    os.system(
-        'mshta vbscript:msgbox("内网穿透工具仅支持Cpolar，若没有安装，请到官网 https://www.cpolar.com/download 下载",48,"提示")(window.close)'
-    )
-    os.system(
-        'mshta vbscript:msgbox("需要手动开启开启隧道,点击“确定”或关闭窗口跳转到Cpolar管理面板",48,"提示")(window.close)'
-    )
+    easygui.msgbox("内网穿透工具仅支持Cpolar，若没有安装，请到官网 https://www.cpolar.com/download 下载","提示",'确定')
+    easygui.msgbox("需要手动开启开启隧道,点击“确定”或关闭窗口跳转到Cpolar管理面板",'提示','确定')
     webbrowser.open_new("http://localhost:9200/")
     m2 = '选择服务器启动方式，如果已经选择过路径了，\n请点击“我已配置过”'
     c2 = ['我已配置过','选择文件位置']
@@ -59,17 +54,17 @@ if cho == choices[1]:
         with open('fdp_save.txt', 'w') as f:
             f.write(Folderpath)
         # 显示提示
-        os.system(
-            'mshta vbscript:msgbox("启动路径已保存，下次启动可直接选择“我已配置过”，再次选择路径会覆盖原来的路径",64,"提示")(window.close)'
-        )
+        easygui.buttonbox('启动路径已保存','启动路径已保存',['确定'])
         os.chdir(Folderpath)
         os.system('start StartServer.bat')
+
     if ch == c2[0]:
         #读取保存的路径文件
         with open('fdp_save.txt', 'r') as file:
             content = file.read()
         os.chdir(content)
         os.system('start StartServer.bat')
+
 if cho == choices[2]:
     webbrowser.open_new('https://www.cpolar.com/download')
 if cho == choices[3]:
@@ -126,22 +121,18 @@ if cho == choices[3]:
                'https://launcher.mojang.com/v1/objects/d8321edc9470e56b8ad5c67bbd16beba25843336/server.jar']
         c0bb = easygui.choicebox(mbb,tbb,cbb)
         Folderpath_download = filedialog.askdirectory(title='选择安装路径（路径不要带空格）')
+        # 检测机器与baidu.com的连接
+        url = 'https://www.baidu.com'
+        try:
+            urllib.request.urlopen(url, timeout=5)
+        except urllib.error.URLError as ex:
+            easygui.buttonbox('网络连接异常，请检查网络连接','联网失败',['确定'])
+            sys.exit(1)
         if c0bb == cbb[0]:
             URL = URL[0]
             PATH = Folderpath_download
             wget.download(URL, PATH)
-        #检测机器与baidu.com的连接
-        url = 'https://www.baidu.com'
-        try:
-            urllib.request.urlopen(url, timeout=5)
-            os.system(
-                'mshta vbscript:msgbox("点击“确定”或关闭窗口开始下载",64,"提示")(window.close)'
-            )
-        except urllib.error.URLError as ex:
-            os.system(
-                'mshta vbscript:msgbox("网络连接异常，请检查网络连接",16,"提示")(window.close)'
-            )
-            sys.exit(1)
+
         if c0bb == cbb[1]:
             URL = URL[1]
             PATH = Folderpath_download
@@ -218,33 +209,23 @@ if cho == choices[3]:
             URL = URL[19]
             PATH = Folderpath_download
             wget.download(URL, PATH)
-        os.system(
-            'mshta vbscript:msgbox("下载完毕",64,"提示")(window.close)'
-        )
+        easygui.buttonbox('下载完成','下载完成',['继续'])
         while True:
             rmin = easygui.enterbox('输入服务端最小内存分配(GB)')
             rmax = easygui.enterbox('输入服务器最大内存分配(GB)')
             if rmax <= rmin:
-                os.system(
-                    'mshta vbscript:msgbox("最大分配内存不可小于最小分配内存",16,"错误")(window.close)'
-                )
+                easygui.buttonbox('最大分配内存不可小于最小分配内存','错误',['重试'])
             if rmax > rmin:
                 server_path = Folderpath_download
                 full_server_path = server_path+'/StartServer.bat'
                 with open(full_server_path, 'w') as f:
                     f.write('java -Xmx'+rmax+'G -Xms'+rmin+'G -jar server.jar')
-                os.system(
-                    'mshta vbscript:msgbox("启动脚本写入完成，重启程序选择启动即可",64,"提示")(window.close)'
-                )
+                easygui.buttonbox('启动脚本写入完成','完成',['确定'])
                 break
             else:
-                os.system(
-                    'mshta vbscript:msgbox("发生错误：输入了非法值，请输入整数",16,"错误")(window.close)'
-                )
+                easygui.buttonbox('无效的值','请重试',['重试'])
     if c0xd == cxd[1]:
-        os.system(
-            'mshta vbscript:msgbox("暂未开放",16,"错误")(window.close)'
-        )
+        easygui.buttonbox('暂未开放','错误',['关闭'])
 
 if cho == choices[4]:
     Folderpath_server = filedialog.askdirectory(title='选择服务器jar文件夹路径（路径不要带空格）')
@@ -257,15 +238,9 @@ if cho == choices[4]:
             full_server_path_sele = server_path_sele + '/StartServer.bat'
             with open(full_server_path_sele, 'w') as f:
                 f.write('java -Xmx' + rmaxe + 'G -Xms' + rmine + 'G -jar server.jar')
-            os.system(
-                'mshta vbscript:msgbox("启动脚本写入完成，重启程序选择启动即可",64,"提示")(window.close)'
-            )
+            easygui.buttonbox('启动脚本写入完成','完成',['确定'])
             break
-        elif rmaxe < rmine:
-            os.system(
-                'mshta vbscript:msgbox("最大分配内存不可小于最小分配内存",16,"错误")(window.close)'
-            )
+        elif rmaxe <= rmine:
+            easygui.buttonbox('最大分配内存不可小于最小分配内存','错误',['重试'])
         else:
-            os.system(
-                'mshta vbscript:msgbox("发生错误：输入了非法值，请输入整数",16,"错误")(window.close)'
-            )
+            easygui.buttonbox('无效的值','请重试',['重试'])
