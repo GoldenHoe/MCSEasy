@@ -16,7 +16,7 @@ Minecraft简易开服程序(MCSEasy) README.md
 
 +++环境要求+++
 
-Windows 8 x64以上64位操作系统
+Windows 8.1 x64以上64位操作系统
 
 Java Development Kit(Java JDK) 8或OpenJDK 8。
 
