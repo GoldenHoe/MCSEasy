@@ -5,7 +5,7 @@ Minecraft简易开服程序(MCSEasy) README.md
 
 -----概述-----
 
-本程序是一个用于自动化部署Minecraft服务器的工具，使用Python编写，CxFreeze封装。它旨在简化服务器的安装和启动操作，让有需要创建Minecraft服务器的用户能够更轻松地部署他们的Minecraft服务器。
+本程序是一个用于自动化部署Minecraft服务器的工具，使用Python编写，PyInstaller封装。它旨在简化服务器的安装和启动操作，让有需要创建Minecraft服务器的用户能够更轻松地部署他们的Minecraft服务器。
 
 -----功能特性-----
 
