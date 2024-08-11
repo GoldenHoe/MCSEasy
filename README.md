@@ -14,9 +14,9 @@ Minecraft简易开服程序(MCSEasy) README.md
 
 -----使用指南-----
 
-+++环境要求+++
++++环境要求+++(注：标注“*”的为程序硬性要求)
 
-Windows 8.1及Windows Server 2012 R2以上64位操作系统
+* Windows 8.1及Windows Server 2012 R2以上64位操作系统
 
 Java Development Kit(Java JDK) 8或OpenJDK 8。
 
@@ -26,7 +26,7 @@ CPU推荐2核心及以上，8核心以上最佳。
 
 拥有至少2GB RAM。
 
-确保网络连接。
+* 确保网络连接。
 
 +++下载+++
 
@@ -35,7 +35,8 @@ CPU推荐2核心及以上，8核心以上最佳。
 
 +++启动+++
 
-解压后找到位于./dist文件夹的MCSEasy.exe，v1.0.0-r2可将程序单独复制出文件夹，不影响使用
+解压后直接运行MCSEasy.exe
+v1.0.0的Beta版本解压后到dist文件夹中运行MCSEasy.exe
 
 +++注意事项+++
 
