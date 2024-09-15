@@ -1,55 +1,55 @@
-# MCSEasy
+# Minecraft 简易开服程序  <small>MCSEasy</small>
 
-*我们将在2024年10月1日之后结束对Windows Server 2012 R2和Windows 8.1的支持，请将设备升级到Windows Server 2016(14393.10)或Windows 10 1507(10.0.10240)及以上版本以继续使用MCSEasy
+用于 *帮助有需要创建 Minecraft 服务器的用户开启他们的MC服务器*
 
-用于帮助有需要创建Minecraft服务器的用户开启他们的MC服务器
+> [!IMPORTANT]
+> 我们将在 2024 年 10 月 1 日 之后 **结束对 Windows Server 2012 R2 和 Windows 8.1 的支持**，请将设备升级到以下版本以继续使用 MCSEasy：<br>
+> - Windows Server 2016 <small>14393.10</small><br/>
+> - Windows 10 1507 <small>10.0.10240</small>
+> - 更高版本
 
-Minecraft简易开服程序(MCSEasy) README.md
+## 概述
 
------概述-----
+本程序是一个**用于自动化部署 Minecraft 服务器的工具**，使用 **Python** 编写，**PyInstaller** 封装。
+<br>它旨在**简化服务器的安装和启动操作，让有需要创建 Minecraft 服务器的用户能够更轻松地部署他们的 Minecraft 服务器**。
 
-本程序是一个用于自动化部署Minecraft服务器的工具，使用Python编写，PyInstaller封装。它旨在简化服务器的安装和启动操作，让有需要创建Minecraft服务器的用户能够更轻松地部署他们的Minecraft服务器。
+## 功能特性
 
------功能特性-----
+### 快捷启动
+支持通过简单的UI交互启动 Minecraft 服务器。
 
-快捷启动：支持通过简单的UI交互启动Minecraft服务器。
-版本下载：选择不同的版本并自动下载Minecraft服务器jar文件并且引导用户设置，支持Vanilla原版，后续会添加对水龙头(Spigot)端的支持。
+### 版本下载
+选择不同的版本并自动下载 Minecraft 服务器 jar 文件并且引导用户设置，支持 Vanilla 原版，后续会添加对水龙头 (Spigot) 端的支持。
 
------使用指南-----
+## 使用指南
+### 程序硬性要求
+1. Windows 8.1及Windows Server 2012 R2以上64位操作系统 <br><small>自2024年10月1日起将停止对Windows 8.1和Windows Server 2012 R2的支持</small>
+2. 确保网络连接。
 
-+++环境要求+++(注：标注“*”的为程序硬性要求)
+### 建议
+1. Java Development Kit(Java JDK) 8或OpenJDK 8。
+2. 足够的磁盘空间用于Minecraft服务器文件。
+3. CPU推荐2核心及以上，8核心以上最佳。
+4. 拥有至少2GB RAM。
 
-* Windows 8.1及Windows Server 2012 R2以上64位操作系统(自2024年10月1日起将停止对Windows 8.1和Windows Server 2012 R2的支持)
+## 下载方式
+1. 直接从GitHub仓库克隆本项目。
+2. 下载发布的压缩包并解压到指定目录。
 
-Java Development Kit(Java JDK) 8或OpenJDK 8。
+## 启动
 
-足够的磁盘空间用于Minecraft服务器文件。
+解压后直接运行 MCSEasy.exe
+v1.0.0 的 Beta 版本 解压后到 dist 文件夹中运行 MCSEasy.exe
 
-CPU推荐2核心及以上，8核心以上最佳。
-
-拥有至少2GB RAM。
-
-* 确保网络连接。
-
-+++下载+++
-
-可以直接从GitHub仓库克隆本项目。
-或者下载发布的压缩包并解压到指定目录。
-
-+++启动+++
-
-解压后直接运行MCSEasy.exe
-v1.0.0的Beta版本解压后到dist文件夹中运行MCSEasy.exe
-
-+++注意事项+++
+## 注意事项
 
 根据你的服务器性能和网络状况，某些操作（下载与启动）可能需要一些时间。
 
------贡献与反馈-----
+## 贡献与反馈
 
-如果你发现任何问题或有改进建议，请发送邮件到Golden_Hoe_Lee@outlook.com。也欢迎任何形式的贡献，包括代码、文档和测试。
+如果你发现任何问题或有改进建议，请发送邮件到**Golden_Hoe_Lee@outlook.com**。也欢迎任何形式的贡献，包括代码、文档和测试。
 
------许可证-----
+## 许可证
 
 本项目遵循MIT许可证。
 
