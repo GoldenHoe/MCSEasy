@@ -1,4 +1,7 @@
 # MCSEasy
+
+*我们将在2024年10月1日之后结束对Windows Server 2012 R2和Windows 8.1的支持，请将设备升级到Windows Server 2016(14393.10)或Windows 10 1507(10.0.10240)及以上版本以继续使用MCSEasy
+
 用于帮助有需要创建Minecraft服务器的用户开启他们的MC服务器
 
 Minecraft简易开服程序(MCSEasy) README.md
@@ -16,7 +19,7 @@ Minecraft简易开服程序(MCSEasy) README.md
 
 +++环境要求+++(注：标注“*”的为程序硬性要求)
 
-* Windows 8.1及Windows Server 2012 R2以上64位操作系统
+* Windows 8.1及Windows Server 2012 R2以上64位操作系统(自2024年10月1日起将停止对Windows 8.1和Windows Server 2012 R2的支持)
 
 Java Development Kit(Java JDK) 8或OpenJDK 8。
 
