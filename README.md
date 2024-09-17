@@ -6,7 +6,7 @@
 > 我们将在 2024 年 10 月 1 日 之后 **结束对 Windows Server 2012 R2 和 Windows 8.1 的支持**，请将设备升级到以下版本以继续使用 MCSEasy：<br>
 > - Windows Server 2016 <small>14393.10</small><br/>
 > - Windows 10 1507 <small>10.0.10240</small>
-> - 更高版本
+> - 更高版本的Windows
 
 ## 概述
 
