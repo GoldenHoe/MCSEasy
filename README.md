@@ -38,8 +38,7 @@
 
 ## 启动
 
-解压后直接运行 MCSEasy.exe
-v1.0.0 的 Beta 版本 解压后到 dist 文件夹中运行 MCSEasy.exe
+解压后**直接**运行 MCSEasy.exe
 
 ## 注意事项
 
