@@ -19,7 +19,7 @@
 支持通过简单的UI交互启动 Minecraft 服务器。
 
 ### 版本下载
-选择不同的版本并自动下载 Minecraft 服务器 jar 文件并且引导用户设置，支持 Vanilla 原版，后续会添加对 Spigot 、 Fabric 和 Forge 端的支持。
+选择不同的版本并自动下载 Minecraft 服务器 jar 文件并且引导用户设置，支持 Vanilla 原版和最新（1.21.1）的Paper端，后续会添加对 Spigot 、 Fabric 和 Forge 端的支持。
 
 ## 使用指南
 ### 程序硬性要求
@@ -32,6 +32,7 @@
 3. CPU推荐2核心及以上，8核心以上最佳。
 4. 拥有至少2GB RAM。
 5. 建议使用以太网连接。
+6. 使用frp等内网穿透软件。
 
 ## 下载方式
 1. 直接从GitHub仓库克隆本项目。
