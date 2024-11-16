@@ -19,7 +19,7 @@
 支持通过简单的UI交互启动 Minecraft 服务器。
 
 ### 版本下载
-选择不同的版本并自动下载 Minecraft 服务器 jar 文件并且引导用户设置，支持 Vanilla 原版和最新（1.21.1）的Paper端，后续会添加对 Spigot 、 Fabric 和 Forge 端的支持。
+选择不同的版本并自动下载 Minecraft 服务器 jar 文件并且引导用户设置，支持 Vanilla 原版和最新（1.21.1）的Paper 和 Spigot端，后续会添加对 Fabric 和 Forge 端的支持。
 
 ## 使用指南
 ### 程序硬性要求
