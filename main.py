@@ -13,7 +13,6 @@ import sys
 import platform
 
 # 让用户自定义启动方式
-easygui.msgbox("如果直接启动报错或闪退，请检查是否正确选择了启动脚本所在路径；\n使用虚拟机可能无法下载版本","提示",'我已知晓')
 msg = '选择启动方式'
 choices = ['直接启动','下载Minecraft服务端','配置服务器内存']
 title = '选择启动方式'
