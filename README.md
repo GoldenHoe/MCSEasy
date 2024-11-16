@@ -23,7 +23,7 @@
 
 ## 使用指南
 ### 程序硬性要求
-1. Windows 8.1及Windows Server 2012 R2以上64位操作系统 <br><small>**（自2024年10月1日起将停止对Windows 8.1和Windows Server 2012 R2的支持）**</small>
+1. Windows 10及Windows Server 2016以上64位操作系统
 2. 确保网络连接。
 
 ### 建议
