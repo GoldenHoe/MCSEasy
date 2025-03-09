@@ -18,10 +18,12 @@
 
 > [!TIP]
 > Q:为什么Legacy版本有Windows版本限制？
+>
 > A:请看GoldenHoe\Chen-Kai-Say仓库
 >
->Q:为什么Nextgen取消了Windows版本限制？
->A:释怀了
+> Q:为什么Nextgen取消了Windows版本限制？
+>
+> A:释怀了
 
 ## 概述
 
