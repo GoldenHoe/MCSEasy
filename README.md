@@ -1,9 +1,17 @@
 # Minecraft 简易开服程序  <small>MCSEasy</small>
 
 用于 *帮助有需要创建 Minecraft 服务器的用户开启他们的MC服务器*
+> [!NOTE]
+> 我们推出了MCSEasy下一代 （*Nextgen*） 的测试版本，拥有更直观的UI，更方便的操作，以及更流畅的运行，MCSEasy Nextgen目前处于Beta阶段，尚不稳定，源码可到**GoldenHoe/MCSEasy/MCSEasy Nextgen/main.py**查看。
 
 > [!IMPORTANT]
-> 我们已经在 2024 年 10 月 1 日 之后 **结束对 Windows Server 2012 R2 和 Windows 8.1 的支持**，请将设备升级到以下版本以继续使用 MCSEasy：<br>
+> Nextgen版本仅支持原版端，后续会增加对模组/插件端的支持。
+
+> [!TIP]
+> 试试Netxgen版本的下载功能?（虽然还是很慢）
+
+> [!IMPORTANT]
+> 我们已经在 2024 年 10 月 1 日 之后 **结束对 Windows Server 2012 R2 和 Windows 8.1 的支持**(***Nextgen仍然支持Windows 8.1与Windows Server 2012 R2***)，请将设备升级到以下版本以继续使用 MCSEasy：<br>
 > - Windows Server 2016 <small>14393.10</small><br/>
 > - Windows 10 1507 <small>10.0.10240</small>
 > - 更高版本的Windows
@@ -19,7 +27,7 @@
 支持通过简单的UI交互启动 Minecraft 服务器。
 
 ### 版本下载
-选择不同的版本并自动下载 Minecraft 服务器 jar 文件并且引导用户设置，支持 Vanilla 原版和最新（1.21.1）的Paper 和 Spigot端，后续会添加对 Fabric 和 Forge 端的支持。
+选择不同的版本并自动下载 Minecraft 服务器 jar 文件并且引导用户设置，支持 Vanilla 原版和最新（1.21.4）的Paper 和 Spigot端，后续会添加对 Fabric 和 Forge 端的支持。
 
 ## 使用指南
 ### 程序硬性要求
