@@ -8,7 +8,7 @@
 > Nextgen版本仅支持原版端，后续会增加对模组/插件端的支持。
 
 > [!TIP]
-> 试试Netxgen版本的下载功能?（虽然还是很慢）
+> 试试Nextgen版本的下载功能?（*虽然还是很慢*)
 
 > [!IMPORTANT]
 > 我们已经在 2024 年 10 月 1 日 之后 **结束对 Windows Server 2012 R2 和 Windows 8.1 的支持**(***Nextgen仍然支持Windows 8.1与Windows Server 2012 R2***)，请将设备升级到以下版本以继续使用 MCSEasy：<br>
