@@ -2,7 +2,7 @@
 
 用于 *帮助有需要创建 Minecraft 服务器的用户开启他们的MC服务器*
 > [!NOTE]
-> 我们推出了MCSEasy下一代 （*Nextgen*） 的测试版本，拥有更直观的UI，更方便的操作，以及更流畅的运行，MCSEasy Nextgen目前处于Beta阶段，尚不稳定，源码可到**GoldenHoe/MCSEasy/MCSEasy Nextgen Beta/main.py**查看。
+> 我们推出了MCSEasy下一代 （*Nextgen*） 的测试版本，拥有更直观的UI，更方便的操作，以及更流畅的运行，MCSEasy Nextgen目前处于Beta阶段，尚不稳定，源码可到**GoldenHoe\MCSEasy\MCSEasy Nextgen Beta\main.py**查看。
 
 > [!IMPORTANT]
 > Nextgen版本仅支持原版端，后续会增加对模组/插件端的支持。
@@ -11,10 +11,17 @@
 > 试试Nextgen版本的下载功能?（*虽然还是很慢*)
 
 > [!IMPORTANT]
-> 我们已经在 2024 年 10 月 1 日 之后 **结束对 Windows Server 2012 R2 和 Windows 8.1 的支持**(***Nextgen仍然支持Windows 8.1与Windows Server 2012 R2***)，请将设备升级到以下版本以继续使用 MCSEasy：<br>
+> 我们已经在 2024 年 10 月 1 日 之后 **结束对 Windows Server 2012 R2 和 Windows 8.1 的支持**(***Nextgen不再阻止Windows 8.1与Windows Server 2012 R2***)，请将设备升级到以下版本以继续使用 MCSEasy：<br>
 > - Windows Server 2016 <small>14393.10</small><br/>
 > - Windows 10 1507 <small>10.0.10240</small>
 > - 更高版本的Windows
+
+> [!TIP]
+> Q:为什么Legacy版本有Windows版本限制？
+> A:请看GoldenHoe\Chen-Kai-Say仓库
+>
+>Q:为什么Nextgen取消了Windows版本限制？
+>A:释怀了
 
 ## 概述
 
