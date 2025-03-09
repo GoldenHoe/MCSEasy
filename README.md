@@ -2,7 +2,7 @@
 
 用于 *帮助有需要创建 Minecraft 服务器的用户开启他们的MC服务器*
 > [!NOTE]
-> 我们推出了MCSEasy下一代 （*Nextgen*） 的测试版本，拥有更直观的UI，更方便的操作，以及更流畅的运行，MCSEasy Nextgen目前处于Beta阶段，尚不稳定，源码可到**GoldenHoe/MCSEasy/MCSEasy Nextgen/main.py**查看。
+> 我们推出了MCSEasy下一代 （*Nextgen*） 的测试版本，拥有更直观的UI，更方便的操作，以及更流畅的运行，MCSEasy Nextgen目前处于Beta阶段，尚不稳定，源码可到**GoldenHoe/MCSEasy/MCSEasy Nextgen Beta/main.py**查看。
 
 > [!IMPORTANT]
 > Nextgen版本仅支持原版端，后续会增加对模组/插件端的支持。
