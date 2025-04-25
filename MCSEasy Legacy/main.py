@@ -6,11 +6,11 @@ import easygui
 import os
 import tkinter as tk
 from tkinter import filedialog
-import webbrowser
+#import webbrowser
 import wget
 import urllib.request
 import sys
-import platform
+#import platform
 
 # 让用户自定义启动方式
 msg = '选择启动方式'
