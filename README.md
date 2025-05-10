@@ -11,9 +11,9 @@
 > 试试Nextgen版本的下载功能?（*虽然还是很慢*)
 
 > [!IMPORTANT]
-> MCSEasy**不支持**Windows 8.1或Windows Server 2012 R2**以下**的Windows版本，请升级到以下版本来使用MCSEasy：
-> - Windows Server 2012 R2
-> - Windows 8.1
+> MCSEasy**不支持**Windows 8(Build 9200 *经过验证可以运行的Windows版本*)或Windows Server 2012**以下**的Windows版本，请升级到以下版本来使用MCSEasy：
+> - Windows Server 2012
+> - Windows 8(Build 9200)
 > - 更高版本的Windows
 
 ## 概述
@@ -24,14 +24,14 @@
 ## 功能特性
 
 ### 快捷启动
-支持通过简单的UI交互启动并监视 Minecraft 服务器。
+支持通过简单的UI配置、交互、启动和监视 Minecraft 服务器。
 
 ### 版本下载
 选择不同的版本并自动下载 Minecraft 服务器 jar 文件并且引导用户设置，支持 Vanilla 原版和最新（1.21.5）的Paper 和 Spigot端（MCSEasy Legacy，后续会对Nextgen更新下载)，后续会添加对 Fabric 和 Forge 端的支持。
 
 ## 使用指南
 ### 程序硬性要求
-1. Windows 8.1及Windows Server 2012 R2以上64位操作系统
+1. Windows 8及Windows Server 2012以上64位操作系统
 2. 确保网络连接。
 3. *CPUID和MAC地址未被禁止（预更新）*
 
