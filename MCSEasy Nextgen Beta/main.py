@@ -1,15 +1,76 @@
 # coding=utf-8
 # Copyright (C) 2024-2025 Golden_Hoe,HOE Software Team. #
+
+# 导入库
 import sys
 import os
 import json
+import ctypes
 import urllib.request
+import psutil
+import logging
+import ctypes
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
                              QPushButton, QComboBox, QFileDialog, QMessageBox,
                              QLabel, QLineEdit, QStackedWidget, QPlainTextEdit)
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QProcess, QTimer
 from PyQt5.QtGui import QFont, QTextCursor
 from pywinstyles import apply_style
+
+
+# ==================== 主程序 ====================
+# 最后修改 2025/5/11
+# ==================== 配置日志 ====================
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler("launch.log"),  # 日志输出到文件
+        logging.StreamHandler()  # 日志输出到控制台
+    ]
+)
+logger = logging.getLogger(__name__)
+# ++++++++++++++++++++ 检测硬件信息 ++++++++++++++++++++
+def check_hardware():
+    # 设定警告数量初始值
+    warn_n = 0
+    # 检查CPU核心数量
+    cpu_cores = psutil.cpu_count(logical=False)  # 获取物理核心数
+    logger.info(f"CPU物理核心数量: {cpu_cores}")
+    if cpu_cores < 2:
+        logger.warning("警告: CPU核心数量不足 (少于2个)。")
+        ctypes.windll.user32.MessageBoxW(0, "CPU物理核心数核心数少于2，可能会导致服务器性能偏低。", "警告", 0x30)
+        warn_n = warn_n + 1
+    else:
+        logger.info("CPU核心数量检查通过。")
+
+    # 检查内存
+    memory = psutil.virtual_memory()
+    logger.info(f"计算机总内存: {memory.total / 1024**2} MB")
+    if memory.total / 1024**2 < 2048:
+        logger.warning("警告:计算机已安装内存过低 (低于 2048 MB)。")
+        ctypes.windll.user32.MessageBoxW(0, "已安装的运行内存少于2048M，可能会导致服务器性能偏低。", "警告", 0x30)
+        warn_n = warn_n+1
+    else:
+        logger.info("内存检查通过。")
+
+    # 检查磁盘空间
+    current_file_path = os.path.abspath(__file__)
+    disk_root = os.path.splitdrive(current_file_path)[0] + '\\'
+    disk_usage = psutil.disk_usage(disk_root)
+    logger.info(f"当前磁盘可用容量: {disk_usage.free / 1024**3} GB")
+    if disk_usage.free / 1024**3 < 8:
+        logger.warning("磁盘空间不足 (可用空间少于 8 GB)。")
+        ctypes.windll.user32.MessageBoxW(0, "磁盘可用空间不足8GB，可能会导致服务器文件无法存放。", "警告", 0x30)
+        warn_n = warn_n + 1
+    else:
+        logger.info("磁盘容量检查通过。")
+
+    if warn_n != 0:
+        logger.info(f"硬件检查结束，共发现{warn_n}个性能问题。")
+        ctypes.windll.user32.MessageBoxW(0, f"硬件检测发现了{warn_n}个性能问题。", "警告", 0x30)
+    else:
+        logger.info('硬件检查结束，没有发现问题。')
 
 
 def load_list_file(filename):
@@ -39,7 +100,6 @@ class DownloadThread(QThread):
                 downloaded = 0
                 chunk_size = 8192
                 filename = os.path.join(self.save_path, self.url.split('/')[-1])
-
                 with open(filename, 'wb') as f:
                     while True:
                         chunk = response.read(chunk_size)
@@ -60,13 +120,16 @@ class ServerDeployWindow(QMainWindow):
     process_output = pyqtSignal(str)
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("简单 Minecraft 服务器部署工具(MCSEasy) Version-1.2.0.0-Beta")
+        self.setWindowTitle("简单 Minecraft 服务器部署工具(MCSEasy) Version-1.2.0.0-Beta2")
         self.setGeometry(100, 100, 1000, 500)#self.setGeometry(100, 100, 800, 500)
         self.download_thread = None
         self.log_widget = None  # 日志控件
         # 新增进程对象
         self.server_process = None
         self.process_output.connect(self.update_log)  # 连接输出信号
+        self.has_unsaved_changes = False
+        self.config_controls = {}
+        self.original_config = {}
 
         # ================== 样式设置 ==================
         apply_style(self, "normal")
@@ -124,6 +187,7 @@ class ServerDeployWindow(QMainWindow):
         self.create_start_page()
         self.create_download_page()
         self.create_memory_page()
+        self.create_config_page()
 
         left_layout.addWidget(QLabel("选择操作模式:"))
         self.mode_combo = QComboBox()
@@ -145,6 +209,7 @@ class ServerDeployWindow(QMainWindow):
         self.log_widget.setFont(log_font)
         right_layout.addWidget(self.log_widget)
         main_layout.addWidget(right_widget, stretch=3)  # 右侧占3份
+        self.right_widget = right_widget  # 保存引用
         # 新增指令输入框
         self.command_input = QLineEdit()
         self.command_input.setPlaceholderText("输入服务器指令（按回车发送）")
@@ -223,8 +288,11 @@ class ServerDeployWindow(QMainWindow):
         self.stop_btn = QPushButton("停止服务器")
         self.stop_btn.hide()
         self.stop_btn.clicked.connect(self.stop_server)
+        self.config_btn = QPushButton("修改服务器配置")
+        self.config_btn.clicked.connect(lambda: self.load_server_config())
         btn_layout.addWidget(self.execute_btn_start)
         btn_layout.addWidget(self.stop_btn)
+        btn_layout.addWidget(self.config_btn)
 
         # 將按鈕組添加到主佈局底部
         layout.addWidget(btn_group)
@@ -314,6 +382,8 @@ class ServerDeployWindow(QMainWindow):
         """切换模式页面"""
         index = self.mode_combo.currentIndex()
         self.stacked_widget.setCurrentIndex(index)
+        # 显示/隐藏日志区域
+        self.right_widget.setVisible(index != 3)  # 配置页隐藏日志
 
     def select_directory(self):
         """选择路径并更新对应页面的标签"""
@@ -361,6 +431,7 @@ class ServerDeployWindow(QMainWindow):
     # 以下方法保持原有功能实现，仅修改路径获取方式
     def launch_server(self, path):
         """修改后的启动方法"""
+        self.modify_eila(path)
         if not path or not os.path.exists(os.path.join(path, 'StartServer.bat')):
             raise ValueError("无效的服务器路径")
 
@@ -448,8 +519,130 @@ class ServerDeployWindow(QMainWindow):
         with open(bat_path, 'w') as f:
             f.write(f'java -Xmx{max_mem}G -Xms{min_mem}G -jar server.jar --nogui')
         self.save_settings()
+    def modify_eila(self, path):
+        """首次启动修改EULA.txt"""
+        eula_path = os.path.join(path, "eula.txt")
+        if os.path.exists(eula_path):
+            with open(eula_path, "r")as f:
+                content = f.read()
+            if "eula=false" in content.lower():
+                with open(eula_path, 'w')as f:
+                    f.write(content.replace("eula=false","eula=true"))
+                self.log_signal.emit("[MCSeasy-INFO] 已自动同意EULA协议")
+
+    def create_config_page(self):
+        """创建服务器配置编辑页"""
+        self.config_page = QWidget()
+        layout = QVBoxLayout(self.config_page)
+        #返回主页面按钮
+        back_btn = QPushButton('返回')
+        back_btn.clicked.connect(self.check_unsaved_changes)
+        layout.addWidget(back_btn, alignment=Qt.AlignLeft)
+        # 配置项容器
+        self.config_widget = QWidget()
+        self.config_layout = QVBoxLayout(self.config_widget)
+        layout.addWidget(self.config_widget)
+        # 按钮组
+        btn_group = QWidget()
+        btn_layout = QHBoxLayout(btn_group)
+        self.save_btn = QPushButton("保存并退出")
+        self.save_btn.clicked.connect(self.save_server_config)
+        self.revert_btn = QPushButton("撤销全部更改")
+        self.revert_btn.clicked.connect(self.load_server_config)
+        btn_layout.addWidget(self.revert_btn)
+        btn_layout.addWidget(self.save_btn)
+        layout.addWidget(btn_group)
+        self.stacked_widget.addWidget(self.config_page)
+
+    def load_server_config(self):
+        """加载服务器配置"""
+        path = self.path_label_start.text()
+        prop_path = os.path.join(path, 'server.properties')
+        self.original_config = {}
+
+        if os.path.exists(prop_path):
+            with open(prop_path, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith('#'):
+                        key_val = line.split('=')
+                        if len(key_val) == 2:
+                            self.original_config[key_val[0]] = key_val[1]
+
+        # 清空现有控件
+        for i in reversed(range(self.config_layout.count())):
+            self.config_layout.itemAt(i).widget().setParent(None)
+
+        # 生成配置控件
+        self.config_controls = {}
+        for key, value in self.original_config.items():
+            widget = QWidget()
+            layout = QHBoxLayout(widget)
+            layout.addWidget(QLabel(f"{key}:"), stretch=1)
+
+            # 根据值类型创建控件
+            if value.lower() in ['true', 'false']:
+                combo = QComboBox()
+                combo.addItems(['true', 'false'])
+                combo.setCurrentText(value)
+                layout.addWidget(combo, stretch=2)
+                self.config_controls[key] = combo
+            else:
+                edit = QLineEdit(value)
+                layout.addWidget(edit, stretch=2)
+                self.config_controls[key] = edit
+
+            self.config_layout.addWidget(widget)
+
+        self.stacked_widget.setCurrentIndex(3)  # 假设配置页是第4个页面
+        self.has_unsaved_changes = False
+        for control in self.config_controls.values():
+            if isinstance(control, QComboBox):
+                control.currentIndexChanged.connect(lambda: setattr(self, 'has_unsaved_changes', True))
+            else:
+                control.textChanged.connect(lambda: setattr(self, 'has_unsaved_changes', True))
+
+    def save_server_config(self):
+        """保存服务器配置"""
+        path = self.path_label_start.text()
+        prop_path = os.path.join(path, 'server.properties')
+
+        new_config = []
+        for key, control in self.config_controls.items():
+            value = control.currentText() if isinstance(control, QComboBox) else control.text()
+            new_config.append(f"{key}={value}")
+
+        with open(prop_path, 'w') as f:
+            f.write('\n'.join(new_config))
+
+        self.stacked_widget.setCurrentIndex(0)
+        self.log_signal.emit("[MCSEasy-INFO] 服务器配置已更新")
+        self.has_unsaved_changes = False
+
+    def check_unsaved_changes(self):
+        """检查未保存的更改"""
+        if self.has_unsaved_changes:
+            msg = QMessageBox()
+            msg.setWindowTitle("未保存的更改")
+            msg.setText("您有未保存的更改，是否要保存？")
+            msg.addButton("保存并退出", QMessageBox.AcceptRole)
+            msg.addButton("不保存退出", QMessageBox.RejectRole)
+            msg.addButton("返回", QMessageBox.HelpRole)
+            ret = msg.exec_()
+
+            if ret == 0:  # 保存并退出
+                self.save_server_config()
+            elif ret == 1:  # 不保存退出
+                self.stacked_widget.setCurrentIndex(0)
+            else:  # 返回
+                return
+        else:
+            self.stacked_widget.setCurrentIndex(0)
+
+
 
 if __name__ == "__main__":
+    check_hardware()
     app = QApplication(sys.argv)
     app_font = QFont("Microsoft YaHei")
     app.setFont(app_font)
