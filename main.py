@@ -12,7 +12,7 @@ import logging
 import ctypes
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
                              QPushButton, QComboBox, QFileDialog, QMessageBox,
-                             QLabel, QLineEdit, QStackedWidget, QPlainTextEdit)
+                             QLabel, QLineEdit, QStackedWidget, QPlainTextEdit, QScrollArea)
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QProcess, QTimer
 from PyQt5.QtGui import QFont, QTextCursor
 from pywinstyles import apply_style
@@ -81,6 +81,7 @@ def load_list_file(filename):
         return eval(content)
     except Exception as e:
         print(f"加载列表文件错误: {str(e)}")
+        logger.error(f'加载文件列表错误: {str(e)}')
         return []
 
 
@@ -235,8 +236,10 @@ class ServerDeployWindow(QMainWindow):
                     self.mem_min.setText(settings.get("min_mem", ""))
                     self.mem_max.setText(settings.get("max_mem", ""))
                 self.log_signal.emit("[MCSEasy-INFO] 已加载保存的配置")
+                logger.info('已加载保存的配置')
             except Exception as e:
                 self.log_signal.emit(f"[MCSEasy-ERROR] 配置加载失败: {str(e)}")
+                logger.error(f'配置加载失败: {str(e)}')
 
     def save_settings(self):
         """保存当前配置到文件"""
@@ -251,8 +254,10 @@ class ServerDeployWindow(QMainWindow):
             with open("mcseasy_settings.meconf", 'w', encoding='utf-8') as f:
                 json.dump(settings, f, indent=2)
             self.log_signal.emit("[MCSEasy-INFO] 配置已保存")
+            logger.info('配置已保存')
         except Exception as e:
             self.log_signal.emit(f"[MCSEasy-ERROR] 配置保存失败: {str(e)}")
+            logger.error(f'配置保存失败{str(e)}')
 
     def create_start_page(self):
         """启动页面"""
@@ -379,11 +384,19 @@ class ServerDeployWindow(QMainWindow):
         self.stacked_widget.addWidget(page)
 
     def switch_mode_page(self):
-        """切换模式页面"""
+        """切换模式页面时调整窗口尺寸"""
         index = self.mode_combo.currentIndex()
         self.stacked_widget.setCurrentIndex(index)
-        # 显示/隐藏日志区域
-        self.right_widget.setVisible(index != 3)  # 配置页隐藏日志
+
+        # 设置不同模式下的推荐窗口尺寸
+        if index == 3:  # 配置页面
+            self.setFixedSize(1000, 600)  # 固定适合配置页面的尺寸
+        else:
+            self.setFixedSize(1000, 500)  # 恢复默认尺寸
+            self.setMinimumSize(800, 400)  # 允许最小缩放
+            self.setMaximumSize(1920, 1080)  # 限制最大尺寸
+
+        self.right_widget.setVisible(index != 3)
 
     def select_directory(self):
         """选择路径并更新对应页面的标签"""
@@ -416,12 +429,14 @@ class ServerDeployWindow(QMainWindow):
                 self.configure_memory(path)
 
             self.log_signal.emit(f"[MCSEasy-INFO] {mode} 操作已执行")
+            logger.info(f"{mode} 操作已执行")
         except Exception as e:
             self.log_signal.emit(f"[MCSEasy-ERROR] {str(e)}")
             QMessageBox.critical(self, "错误", f"操作失败: {str(e)}")
+            logger.error(f'操作失败: {str(e)}')
 
     def update_log(self, message):
-        """更新日志内容（优化版）"""
+        """更新日志内容"""
         cursor = self.log_widget.textCursor()
         cursor.movePosition(QTextCursor.End)
         cursor.insertText(f"{message}\n")
@@ -433,6 +448,7 @@ class ServerDeployWindow(QMainWindow):
         """修改后的启动方法"""
         self.modify_eila(path)
         if not path or not os.path.exists(os.path.join(path, 'StartServer.bat')):
+            logger.error('服务器路径无效')
             raise ValueError("无效的服务器路径")
 
         try:
@@ -449,23 +465,26 @@ class ServerDeployWindow(QMainWindow):
 
         except Exception as e:
             self.log_signal.emit(f"[MCSEasy-ERROR] 启动失败: {str(e)}")
+            logger.error(f'启动服务器失败: {str(e)}')
 
     def on_server_stopped(self):
         """服务器停止时的处理"""
         self.execute_btn_start.show()
         self.stop_btn.hide()
         self.log_signal.emit("[MCSEasy-INFO] 服务器已停止")
+        logger.info('服务器已停止')
 
     def stop_server(self):
         """停止服务器"""
         if self.server_process:
             self.server_process.write("stop\n".encode())  # 发送stop命令
-            QTimer.singleShot(2000, self.force_kill_server)  # 2秒后强制终止
+            QTimer.singleShot(20000, self.force_kill_server)  # 20秒后强制终止
 
     def force_kill_server(self):
         if self.server_process and self.server_process.state() == QProcess.Running:
             self.server_process.kill()
             self.log_signal.emit("[MCSEasy-WARN] 已强制终止服务器进程")
+            logger.warning('服务器进程被强制停止')
 
     def send_command(self):
         """发送指令到服务器"""
@@ -491,6 +510,7 @@ class ServerDeployWindow(QMainWindow):
         try:
             urllib.request.urlopen('http://connectivitycheck.gstatic.com/generate_204', timeout=5)
         except:
+            logger.error('网络连接异常')
             raise ConnectionError("网络连接异常")
 
         self.download_thread = DownloadThread(url, path)
@@ -504,8 +524,10 @@ class ServerDeployWindow(QMainWindow):
         self.execute_btn_download.setText("开始下载")
         if success:
             QMessageBox.information(self, "完成", f"服务端已保存至:\n{message}")
+            logger.info(f'下载完毕，服务器文件保存至: {message}')
         else:
             QMessageBox.critical(self, "错误", f"下载失败: {message}")
+            logger.error(f'下载失败: {message}')
 
     def configure_memory(self, path):
         min_mem = self.mem_min.text()
@@ -529,20 +551,36 @@ class ServerDeployWindow(QMainWindow):
                 with open(eula_path, 'w')as f:
                     f.write(content.replace("eula=false","eula=true"))
                 self.log_signal.emit("[MCSeasy-INFO] 已自动同意EULA协议")
+                logger.info('自动同意EULA成功')
 
     def create_config_page(self):
         """创建服务器配置编辑页"""
         self.config_page = QWidget()
         layout = QVBoxLayout(self.config_page)
-        #返回主页面按钮
+        layout.setContentsMargins(5, 5, 5, 5)
+        layout.setSpacing(5)
+
+        # 返回按钮
         back_btn = QPushButton('返回')
         back_btn.clicked.connect(self.check_unsaved_changes)
         layout.addWidget(back_btn, alignment=Qt.AlignLeft)
+
+        # 创建滚动区域
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
+        scroll_content = QWidget()
+        scroll_layout = QVBoxLayout(scroll_content)
+
         # 配置项容器
         self.config_widget = QWidget()
         self.config_layout = QVBoxLayout(self.config_widget)
-        layout.addWidget(self.config_widget)
-        # 按钮组
+        self.config_layout.setContentsMargins(5, 5, 5, 5)
+        scroll_layout.addWidget(self.config_widget)
+
+        scroll_area.setWidget(scroll_content)
+        layout.addWidget(scroll_area)
+
+        # 按钮组（保持在底部）
         btn_group = QWidget()
         btn_layout = QHBoxLayout(btn_group)
         self.save_btn = QPushButton("保存并退出")
@@ -552,55 +590,103 @@ class ServerDeployWindow(QMainWindow):
         btn_layout.addWidget(self.revert_btn)
         btn_layout.addWidget(self.save_btn)
         layout.addWidget(btn_group)
+
         self.stacked_widget.addWidget(self.config_page)
 
     def load_server_config(self):
         """加载服务器配置"""
         path = self.path_label_start.text()
+        if not path:
+            QMessageBox.warning(self, "警告", "请先选择服务器路径")
+            return
+
+        # 安全清理旧控件
+        while self.config_layout.count():
+            item = self.config_layout.takeAt(0)
+            widget = item.widget()
+            if widget:
+                # 断开所有信号连接
+                if isinstance(widget, QComboBox):
+                    try:
+                        widget.currentIndexChanged.disconnect()
+                    except TypeError:
+                        pass
+                elif isinstance(widget, QLineEdit):
+                    try:
+                        widget.textChanged.disconnect()
+                    except TypeError:
+                        pass
+                widget.deleteLater()
+
+        # 加载配置文件
         prop_path = os.path.join(path, 'server.properties')
         self.original_config = {}
 
         if os.path.exists(prop_path):
-            with open(prop_path, 'r') as f:
-                for line in f:
-                    line = line.strip()
-                    if line and not line.startswith('#'):
-                        key_val = line.split('=')
-                        if len(key_val) == 2:
-                            self.original_config[key_val[0]] = key_val[1]
+            try:
+                with open(prop_path, 'r') as f:
+                    for line in f:
+                        line = line.strip()
+                        if line and not line.startswith('#'):
+                            key_val = line.split('=')
+                            if len(key_val) == 2:
+                                self.original_config[key_val[0]] = key_val[1]
+            except Exception as e:
+                logger.error(f'配置文件读取失败: {str(e)}')
+                return
 
-        # 清空现有控件
-        for i in reversed(range(self.config_layout.count())):
-            self.config_layout.itemAt(i).widget().setParent(None)
-
-        # 生成配置控件
+        # 生成新控件
         self.config_controls = {}
         for key, value in self.original_config.items():
             widget = QWidget()
             layout = QHBoxLayout(widget)
             layout.addWidget(QLabel(f"{key}:"), stretch=1)
 
-            # 根据值类型创建控件
             if value.lower() in ['true', 'false']:
                 combo = QComboBox()
+                combo.setObjectName(key)  # 设置对象名称
                 combo.addItems(['true', 'false'])
+                combo.blockSignals(True)
                 combo.setCurrentText(value)
-                layout.addWidget(combo, stretch=2)
+                combo.blockSignals(False)
+                combo.currentIndexChanged.connect(
+                    lambda _, k=key, c=combo: self._on_config_changed(k, c)
+                )
                 self.config_controls[key] = combo
+                layout.addWidget(combo, stretch=2)
             else:
-                edit = QLineEdit(value)
-                layout.addWidget(edit, stretch=2)
+                edit = QLineEdit()
+                edit.setObjectName(key)  # 设置对象名称
+                edit.blockSignals(True)
+                edit.setText(value)
+                edit.blockSignals(False)
+                edit.textChanged.connect(
+                    lambda text, k=key, e=edit: self._on_config_changed(k, e)
+                )
                 self.config_controls[key] = edit
+                layout.addWidget(edit, stretch=2)
 
             self.config_layout.addWidget(widget)
 
-        self.stacked_widget.setCurrentIndex(3)  # 假设配置页是第4个页面
-        self.has_unsaved_changes = False
-        for control in self.config_controls.values():
-            if isinstance(control, QComboBox):
-                control.currentIndexChanged.connect(lambda: setattr(self, 'has_unsaved_changes', True))
-            else:
-                control.textChanged.connect(lambda: setattr(self, 'has_unsaved_changes', True))
+        self.stacked_widget.setCurrentIndex(3)
+        self.has_unsaved_changes = False  # 显式重置修改状态
+
+    def _on_config_changed(self, key, control):
+        """配置项修改事件统一处理"""
+        original = self.original_config.get(key, "")
+        current = control.currentText() if isinstance(control, QComboBox) else control.text()
+
+        # 精确检测实际修改
+        if str(current) != str(original):
+            if not self.has_unsaved_changes:
+                self.has_unsaved_changes = True
+        else:
+            # 检查其他控件是否有修改
+            self.has_unsaved_changes = any(
+                str(c.currentText() if isinstance(c, QComboBox) else c.text()) !=
+                str(self.original_config.get(k, ""))
+                for k, c in self.config_controls.items()
+            )
 
     def save_server_config(self):
         """保存服务器配置"""
@@ -617,6 +703,7 @@ class ServerDeployWindow(QMainWindow):
 
         self.stacked_widget.setCurrentIndex(0)
         self.log_signal.emit("[MCSEasy-INFO] 服务器配置已更新")
+        logger.info('服务器配置更新成功')
         self.has_unsaved_changes = False
 
     def check_unsaved_changes(self):

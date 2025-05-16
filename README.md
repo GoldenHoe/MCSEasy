@@ -2,19 +2,19 @@
 
 用于 *帮助有需要创建 Minecraft 服务器的用户开启并监视他们的MC服务器*
 > [!NOTE]
-> 我们推出了MCSEasy下一代 （*Nextgen*） 的测试版本，拥有更美观的UI（*Hoe碎碎念：虽然还是很丑就对了*），更方便的操作，以及更流畅的运行，MCSEasy Nextgen目前处于Beta阶段，尚不稳定，源码可到**GoldenHoe\MCSEasy\MCSEasy Nextgen Beta\main.py**查看。
+> 我们推出了MCSEasy 1.2的Beta版本，拥有更美观的UI（*Hoe碎碎念：其实就是控件疯狂加圆角*），更方便的操作，以及更流畅的运行，MCSEasy 1.2目前处于Beta阶段，尚不稳定，源码可到**GoldenHoe\MCSEasy\main.py**查看。
 
 > [!IMPORTANT]
-> Nextgen版本仅支持原版端，后续会增加对模组/插件端的支持。
-
-> [!TIP]
-> 试试Nextgen版本的下载功能?（*虽然还是很慢*)
+> MCSEasy 1.2版本仅支持原版端，后续会增加对模组/插件端的支持。
 
 > [!IMPORTANT]
 > MCSEasy**不支持**Windows 8(Build 9200 *经过验证可以运行的Windows版本*)或Windows Server 2012**以下**的Windows版本，请升级到以下版本来使用MCSEasy：
 > - Windows Server 2012
 > - Windows 8(Build 9200)
 > - 更高版本的Windows
+
+> [!NOTE]
+> 尚不确定Windows 7 with SP1/SP2是否可以运行。
 
 ## 概述
 
@@ -27,7 +27,7 @@
 支持通过简单的UI配置、交互、启动和监视 Minecraft 服务器。
 
 ### 版本下载
-选择不同的版本并自动下载 Minecraft 服务器 jar 文件并且引导用户设置，支持 Vanilla 原版和最新（1.21.5）的Paper 和 Spigot端（MCSEasy Legacy，后续会对Nextgen更新下载)，后续会添加对 Fabric 和 Forge 端的支持。
+选择不同的版本并自动下载 Minecraft 服务器 jar 文件并且引导用户设置，支持 Vanilla 原版和最新（1.21.5）的Paper 和 Spigot端（MCSEasy 1.1，后续会更新插件端下载和部署)，后续会添加对 Fabric 和 Forge 端的支持。
 
 ## 使用指南
 ### 程序硬性要求
@@ -47,6 +47,7 @@
 ## 下载方式
 1. 直接从GitHub仓库克隆本项目。
 2. 下载发布的压缩包并解压到指定目录。
+3. 下载Release的发布版本(已打包成exe可执行文件)
 
 ## 启动
 
