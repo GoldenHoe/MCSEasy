@@ -142,15 +142,15 @@ class ServerDeployWindow(QMainWindow):
             }
             QComboBox, QLineEdit {
                 background-color: #FFFFFF;
-                border: 2px solid #0078D4;
+                border: 1px solid #0078D4;
                 padding: 5px;
-                border-radius: 8px;
+                border-radius: 5px;
             }
             QPushButton {
                 background-color: #FFFFFF;
-                border: 2px solid #0078D4;
+                border: 1px solid #0078D4;
                 padding: 5px;
-                border-radius: 8px;
+                border-radius: 5px;
             }
             QPushButton:hover {
                 background-color: #F5F5F5;
