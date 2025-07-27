@@ -2,10 +2,10 @@
 
 用于 *帮助有需要创建 Minecraft 服务器的用户开启并监视他们的MC服务器*
 > [!NOTE]
-> 我们推出了MCSEasy 1.2的Beta版本，拥有更美观的UI（*Hoe碎碎念：其实就是控件疯狂加圆角*），更方便的操作，以及更流畅的运行，MCSEasy 1.2目前处于Beta阶段，尚不稳定，源码可到**GoldenHoe\MCSEasy\main.py**查看。
+> 我们推出了MCSEasy 1.2的第二个Beta版本，拥有更美观的UI，更方便的操作，以及更流畅的运行，MCSEasy 1.2正在开发阶段，有已知但暂时无法修复的错误，源码可到**GoldenHoe\MCSEasy\main.py**查看。
 
 > [!IMPORTANT]
-> MCSEasy 1.2版本仅支持原版端，后续会增加对模组/插件端的支持。
+> MCSEasy 1.2-Beta版本仅支持原版端，后续会增加对模组/插件端的支持。
 
 > [!IMPORTANT]
 > MCSEasy**不支持**Windows 8(Build 9200 *经过验证可以运行的Windows版本*)或Windows Server 2012**以下**的Windows版本，请升级到以下版本来使用MCSEasy：
@@ -57,6 +57,10 @@
 
 根据你的计算机性能和网络状况，某些操作（下载与启动）可能需要一些时间。
 
+## *AI内容生成提示
+
+源码中的部分GUI代码由ChatGPT生成。
+
 ## 贡献与反馈
 
 如果你发现任何问题或有改进建议，请发送邮件到**Golden_Hoe_Lee@outlook.com**或**hoe_team@outlook.com**。也欢迎任何形式的贡献，包括代码、文档和测试。
@@ -65,5 +69,5 @@
 
 本项目遵循MIT许可证。
 
-Copyright © 2024 Golden_Hoe,HOE Software Team
+Copyright © 2024-2025 Golden_Hoe,HOE Software Team
 
