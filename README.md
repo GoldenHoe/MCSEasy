@@ -13,7 +13,7 @@
 > - Windows 8(Build 9200)
 > - 更高版本的Windows
 
-> [!NOTE]
+> [!WARNING]
 > 尚不确定Windows 7 with SP1/SP2是否可以运行。
 
 ## 概述
