@@ -1,4 +1,8 @@
-# Minecraft 简易开服程序  <small>MCSEasy</small>
+<h1 align="center">Minecraft简易开服程序MCSEasy</h1>
+
+<p align="center">
+  <img src="logo.svg" alt="MCSEasy Logo" width="150">
+</p>
 
 用于 *帮助有需要创建 Minecraft 服务器的用户开启并监视他们的MC服务器*
 > [!NOTE]
@@ -59,15 +63,16 @@
 
 ## *AI内容生成提示
 
-源码中的部分GUI代码由ChatGPT生成。
+源码中的部分GUI代码由ChatGPT/Google Gemini生成。
 
 ## 贡献与反馈
 
-如果你发现任何问题或有改进建议，请发送邮件到**Golden_Hoe_Lee@outlook.com**或**hoe_team@outlook.com**。也欢迎任何形式的贡献，包括代码、文档和测试。
+如果你发现任何问题或有改进建议，请发送邮件到**Golden_Hoe_Lee@outlook.com**或**hoe_team@outlook.com**。也欢迎任何形式的贡献，包括代码、文档和测试。  
+本项目应用图标生成自[AppIcon Force[↗]](https://zhangyu1818.github.io/appicon-forge/)
 
 ## 许可证
 
 本项目遵循MIT许可证。
 
-Copyright © 2024-2025 Golden_Hoe,HOE Software Team
+Copyright © 2024-2025 Golden_Hoe&HOE Software Team
 
