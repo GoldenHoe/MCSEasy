@@ -6,18 +6,16 @@
 
 用于 *帮助有需要创建 Minecraft 服务器的用户开启并监视他们的MC服务器*
 > [!NOTE]
-> 我们推出了MCSEasy 1.2的第二个Beta版本，拥有更美观的UI，更方便的操作，以及更流畅的运行，MCSEasy 1.2正在开发阶段，有已知但暂时无法修复的错误，源码可到**GoldenHoe\MCSEasy\main.py**查看。
+> 我们推出了MCSEasy 1.2的第二个Beta版本，拥有更美观的UI，更方便的操作，以及更流畅的运行，MCSEasy 1.2正在开发阶段，已经修复了已知的错误，源码可到[**GoldenHoe\MCSEasy\main.py**[↗]](https://github.com/GoldenHoe/MCSEasy/blob/main/main.py)查看，现编译的发行版本为`1.2.0-RC1`，详情请到[GitHub Release[↗]](https://github.com/GoldenHoe/MCSEasy/releases)查看。
 
 > [!IMPORTANT]
 > MCSEasy 1.2-Beta版本仅支持原版端，后续会增加对模组/插件端的支持。
 
-> [!IMPORTANT]
+> [!WARNING]
 > MCSEasy**不支持**Windows 8(Build 9200 *经过验证可以运行的Windows版本*)或Windows Server 2012**以下**的Windows版本，请升级到以下版本来使用MCSEasy：
 > - Windows Server 2012
 > - Windows 8(Build 9200)
 > - 更高版本的Windows
-
-> [!WARNING]
 > 尚不确定Windows 7 with SP1/SP2是否可以运行。
 
 ## 概述
@@ -31,13 +29,12 @@
 支持通过简单的UI配置、交互、启动和监视 Minecraft 服务器。
 
 ### 版本下载
-选择不同的版本并自动下载 Minecraft 服务器 jar 文件并且引导用户设置，支持 Vanilla 原版和最新（1.21.5）的Paper 和 Spigot端（MCSEasy 1.1，后续会更新插件端下载和部署)，后续会添加对 Fabric 和 Forge 端的支持。
+选择不同的版本并自动下载 Minecraft 服务器 jar 文件并且引导用户设置，支持 Vanilla 原版和最新（1.21.8）的Paper 和 Spigot端（MCSEasy 1.1，后续会更新插件端下载和部署)，后续会添加对 Fabric 和 Forge 端的支持。
 
 ## 使用指南
 ### 程序硬性要求
 1. Windows 8及Windows Server 2012以上64位操作系统
 2. 确保网络连接。
-3. *CPUID和MAC地址未被禁止（预更新）*
 
 ### 建议
 1. Java Development Kit(Java JDK) 8或OpenJDK 8。
@@ -61,9 +58,11 @@
 
 根据你的计算机性能和网络状况，某些操作（下载与启动）可能需要一些时间。
 
-## *AI内容生成提示
+## * AI 内容生成提示
 
-源码中的部分GUI代码由ChatGPT/Google Gemini生成。
+本项目部分 GUI 代码由 ChatGPT / Google Gemini 辅助生成，后续已由人工审查和修改。  
+AI 生成的内容仅用于提高开发效率，不保证完全正确性。项目维护与责任由开发者承担。  
+
 
 ## 贡献与反馈
 
