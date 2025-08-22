@@ -4,6 +4,13 @@
   <img src="logo.svg" alt="MCSEasy Logo" width="150">
 </p>
 
+<div align="center">
+
+[![Stars](https://img.shields.io/github/stars/GoldenHoe/MCSEasy?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiI+PHBhdGggZD0iTTggLjI1YS43NS43NSAwIDAgMSAuNjczLjQxOGwxLjg4MiAzLjgxNSA0LjIxLjYxMmEuNzUuNzUgMCAwIDEgLjQxNiAxLjI3OWwtMy4wNDYgMi45Ny43MTkgNC4xOTJhLjc1MS43NTEgMCAwIDEtMS4wODguNzkxTDggMTIuMzQ3bC0zLjc2NiAxLjk4YS43NS43NSAwIDAgMS0xLjA4OC0uNzlsLjcyLTQuMTk0TC44MTggNi4zNzRhLjc1Ljc1IDAgMCAxIC40MTYtMS4yOGw0LjIxLS42MTFMNy4zMjcuNjY4QS43NS43NSAwIDAgMSA4IC4yNVoiIGZpbGw9IiNlYWM1NGYiLz48L3N2Zz4=&logoSize=auto&label=Stars&labelColor=444444&color=eac54f)](https://github.com/GoldenHoe/MCSEasy)
+[![LICENSE](https://img.shields.io/github/license/GoldenHoe/MCSEasy?style=for-the-badge)](https://github.com/GoldenHoe/MCSEasy/blob/main/LICENSE)
+![GitHub Release](https://img.shields.io/github/v/release/GoldenHoe/MCSEasy?label=Release&logo=github&style=for-the-badge)
+</div>
+
 用于 *帮助有需要创建 Minecraft 服务器的用户开启并监视他们的MC服务器*
 > [!TIP]
 > 我们推出了针对`MCSEasy 1.2.0.0-RC1`的GUI重构版本`MCSEasy 1.2.0.0-RC1-GUIRefactor`，拥有更美观的UI、更好的个性化、更方便的操作以及更流畅的运行，MCSEasy 1.2.0正在开发阶段，已经修复了已知的内存管理错误，源码可到[**GoldenHoe\MCSEasy\gui-re-main.py**[↗]](https://github.com/GoldenHoe/MCSEasy/blob/main/gui-re-main.py)查看，现编译的发行版本为`1.2.0-RC1`，详情请到[GitHub Release[↗]](https://github.com/GoldenHoe/MCSEasy/releases)查看。
