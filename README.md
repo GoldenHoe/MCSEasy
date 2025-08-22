@@ -5,18 +5,22 @@
 </p>
 
 用于 *帮助有需要创建 Minecraft 服务器的用户开启并监视他们的MC服务器*
+> [!TIP]
+> 我们推出了针对`MCSEasy 1.2.0.0-RC1`的GUI重构版本`MCSEasy 1.2.0.0-RC1-GUIRefactor`，拥有更美观的UI、更好的个性化、更方便的操作以及更流畅的运行，MCSEasy 1.2.0正在开发阶段，已经修复了已知的内存管理错误，源码可到[**GoldenHoe\MCSEasy\gui-re-main.py**[↗]](https://github.com/GoldenHoe/MCSEasy/blob/main/gui-re-main.py)查看，现编译的发行版本为`1.2.0-RC1`，详情请到[GitHub Release[↗]](https://github.com/GoldenHoe/MCSEasy/releases)查看。
+
+
 > [!NOTE]
-> 我们推出了MCSEasy 1.2的第二个Beta版本，拥有更美观的UI，更方便的操作，以及更流畅的运行，MCSEasy 1.2正在开发阶段，已经修复了已知的错误，源码可到[**GoldenHoe\MCSEasy\main.py**[↗]](https://github.com/GoldenHoe/MCSEasy/blob/main/main.py)查看，现编译的发行版本为`1.2.0-RC1`，详情请到[GitHub Release[↗]](https://github.com/GoldenHoe/MCSEasy/releases)查看。
-
-> [!IMPORTANT]
-> MCSEasy 1.2-Beta版本仅支持原版端，后续会增加对模组/插件端的支持。
-
-> [!WARNING]
-> MCSEasy**不支持**Windows 8(Build 9200 *经过验证可以运行的Windows版本*)或Windows Server 2012**以下**的Windows版本，请升级到以下版本来使用MCSEasy：
-> - Windows Server 2012
+> #### 支持的Windows版本:  
+> - Windows 7 with Service Pack 1/2(Build 7601/7602)
+> - Windows Server 2008 R2 Service Pack 1/2(Build 7601/7602)
 > - Windows 8(Build 9200)
-> - 更高版本的Windows
-> 尚不确定Windows 7 with SP1/SP2是否可以运行。
+> - Windows Server 2012(Build 9200)
+> - Windows 8.1(Build 9600)
+> - Windows Server 2012 R2(Build 9600)
+> - Windows 10
+> - Windows Server 2016/2019/2022(Build 14393/17763/20348)
+> - Windows 11
+> - Windows Server 2025(Build 26100)
 
 ## 概述
 
@@ -28,13 +32,13 @@
 ### 快捷启动
 支持通过简单的UI配置、交互、启动和监视 Minecraft 服务器。
 
-### 版本下载
-选择不同的版本并自动下载 Minecraft 服务器 jar 文件并且引导用户设置，支持 Vanilla 原版和最新（1.21.8）的Paper 和 Spigot端（MCSEasy 1.1，后续会更新插件端下载和部署)，后续会添加对 Fabric 和 Forge 端的支持。
+### 版本支持
+选择不同的版本并自动下载 Minecraft 服务器 jar 文件并且采用半自动配置，支持 Vanilla 端 ，已经有对于插件端和模组端的**启动**支持。
 
 ## 使用指南
 ### 程序硬性要求
-1. Windows 8及Windows Server 2012以上64位操作系统
-2. 确保网络连接。
+1. Windows 7 Service Pack 1及Windows Server 2008 R2 Service Pack 1以上64位操作系统
+2. 网络连接。
 
 ### 建议
 1. Java Development Kit(Java JDK) 8或OpenJDK 8。
@@ -70,8 +74,13 @@ AI 生成的内容仅用于提高开发效率，不保证完全正确性。项�
 本项目应用图标生成自[AppIcon Force[↗]](https://zhangyu1818.github.io/appicon-forge/)
 
 ## 许可证
-
-本项目遵循MIT许可证。
-
 Copyright © 2024-2025 Golden_Hoe&HOE Software Team
+项目遵循[MIT许可证[↗]](https://github.com/GoldenHoe/MCSEasy/blob/main/LICENSE)
 
+> [!NOTE]
+> 这份许可证意味着：
+> 
+> 1.  **你可以随意使用这个项目代码**，无论是在个人项目还是商业项目中。
+> 2.  **你可以修改并重新发布**这个代码。
+> 3.  **你甚至可以用它来开发商业软件并销售**，只要你在你的产品中包含原始的 MIT 许可证文本和版权声明。
+> 4.  **作者不提供任何保证**，如果使用该软件导致任何问题，你需要自己承担风险。
